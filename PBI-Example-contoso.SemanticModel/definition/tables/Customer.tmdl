@@ -1,0 +1,132 @@
+table Customer
+	lineageTag: 8e983f5b-7b44-446e-95b4-bda9e2e395be
+
+	column CustomerKey
+		dataType: string
+		lineageTag: 5938cca2-2b4c-4584-8f4e-d727b9c5e69e
+		sourceColumn: CustomerKey
+
+	column GeoAreaKey
+		dataType: string
+		lineageTag: 096b5b92-86d0-43d8-b853-9afc91f9fabf
+		sourceColumn: GeoAreaKey
+
+	column StartDT
+		dataType: string
+		lineageTag: bba815da-3ea3-430e-b036-e8873a7cd18b
+		sourceColumn: StartDT
+
+	column EndDT
+		dataType: string
+		lineageTag: 41ff258d-8ff0-4f42-a4ff-5ceddd22f635
+		sourceColumn: EndDT
+
+	column Continent
+		dataType: string
+		lineageTag: 62adc386-d8e3-4a58-924d-3e91f6e93e92
+		sourceColumn: Continent
+
+	column Gender
+		dataType: string
+		lineageTag: a664c7f8-ca8a-403f-9b86-03a0a83be8c3
+		sourceColumn: Gender
+
+	column Title
+		dataType: string
+		lineageTag: 82704ab0-1470-4bc4-8c58-893a7d6eb65d
+		sourceColumn: Title
+
+	column GivenName
+		dataType: string
+		lineageTag: 968f60ae-2356-41de-b032-e76e0a01a4b5
+		sourceColumn: GivenName
+
+	column MiddleInitial
+		dataType: string
+		lineageTag: ca2e67a6-836b-435a-b2fc-fe59dd250874
+		sourceColumn: MiddleInitial
+
+	column Surname
+		dataType: string
+		lineageTag: 42074c7b-7eed-4168-bb5a-88aaa6b46b88
+		sourceColumn: Surname
+
+	column StreetAddress
+		dataType: string
+		lineageTag: 64d02a96-ff28-4c57-8e87-6a0d826d92dd
+		sourceColumn: StreetAddress
+
+	column City
+		dataType: string
+		lineageTag: 040daa0b-d71e-46ac-b097-ce5f73db1655
+		sourceColumn: City
+
+	column State
+		dataType: string
+		lineageTag: c8ff738a-bdf2-42e7-8ddd-fbe58af4de4b
+		sourceColumn: State
+
+	column StateFull
+		dataType: string
+		lineageTag: 9d2dbe3d-4609-4516-9be0-917427ea56e0
+		sourceColumn: StateFull
+
+	column ZipCode
+		dataType: string
+		lineageTag: 71805357-45b6-4d8f-8678-fe1cc95794b2
+		sourceColumn: ZipCode
+
+	column Country
+		dataType: string
+		lineageTag: f29f0eef-e571-4e23-ba6b-5c2e0ae4e61f
+		sourceColumn: Country
+
+	column CountryFull
+		dataType: string
+		lineageTag: aaf75bbe-bfac-475a-9c3b-d27b25926894
+		sourceColumn: CountryFull
+
+	column Birthday
+		dataType: string
+		lineageTag: 53e8393f-9841-4eb1-a188-3a2ce2c1c01f
+		sourceColumn: Birthday
+
+	column Age
+		dataType: string
+		lineageTag: 67fd4f3b-fd05-413c-b2c3-b189ebd23594
+		sourceColumn: Age
+
+	column Occupation
+		dataType: string
+		lineageTag: 0bdb5fa1-57a0-486a-b209-0d31026e5aeb
+		sourceColumn: Occupation
+
+	column Company
+		dataType: string
+		lineageTag: d8219afb-3bea-4f36-af76-2c7d3b223141
+		sourceColumn: Company
+
+	column Vehicle
+		dataType: string
+		lineageTag: f7cff5ce-2dee-4cd2-bff0-161e1f5ccfa7
+		sourceColumn: Vehicle
+
+	column Latitude
+		dataType: string
+		lineageTag: a188e3d6-b984-4559-b7a1-24f78579f59c
+		sourceColumn: Latitude
+
+	column Longitude
+		dataType: string
+		lineageTag: cb11080d-88d8-41c1-8edc-abe1cd5c23bb
+		sourceColumn: Longitude
+
+	partition Customer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\AdriánSánchezLópez\OneDrive - NEXT DIGITAL HUB S.L\PROJECTS\ProgramacionAgentica\Example-PBI-Contoso\src\customer.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    PromotedHeaders
+

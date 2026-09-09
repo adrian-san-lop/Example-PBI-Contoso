@@ -1,0 +1,97 @@
+table Date
+	lineageTag: 27f0816e-fffe-4fd4-add5-004a4b33384a
+
+	column Date
+		dataType: string
+		lineageTag: 9ba2c1fb-551a-4b8c-b56a-f21a458e76a0
+		sourceColumn: Date
+
+	column DateKey
+		dataType: string
+		lineageTag: 902d6d8f-1592-418f-ada9-d485cbcb5c2b
+		sourceColumn: DateKey
+
+	column Year
+		dataType: string
+		lineageTag: e0dfe029-67ce-4703-9268-5e2a281edbbd
+		sourceColumn: Year
+
+	column YearQuarter
+		dataType: string
+		lineageTag: cb7858b1-546f-4363-ae66-25ee90ff94ff
+		sourceColumn: YearQuarter
+
+	column YearQuarterNumber
+		dataType: string
+		lineageTag: 59fa479f-4307-4d0d-8e6d-292ed614c083
+		sourceColumn: YearQuarterNumber
+
+	column Quarter
+		dataType: string
+		lineageTag: f02aee9a-b4d1-40ef-be78-537036d62f67
+		sourceColumn: Quarter
+
+	column YearMonth
+		dataType: string
+		lineageTag: ed83a9b5-cede-43d4-b2cf-b1ab903d4793
+		sourceColumn: YearMonth
+
+	column YearMonthShort
+		dataType: string
+		lineageTag: d6678668-8368-4a38-8c5f-572eabe4121c
+		sourceColumn: YearMonthShort
+
+	column YearMonthNumber
+		dataType: string
+		lineageTag: 9bf51792-9b66-47a7-9052-761b535fe252
+		sourceColumn: YearMonthNumber
+
+	column Month
+		dataType: string
+		lineageTag: dc737d06-be37-48d8-a2ee-af758cf5a3d5
+		sourceColumn: Month
+
+	column MonthShort
+		dataType: string
+		lineageTag: d341d378-7d90-412b-afb6-05e31ee2a58a
+		sourceColumn: MonthShort
+
+	column MonthNumber
+		dataType: string
+		lineageTag: 9a2c6050-6ace-4c67-aca4-da833549b13b
+		sourceColumn: MonthNumber
+
+	column DayofWeek
+		dataType: string
+		lineageTag: e22bb7e5-fdbb-4e9e-bfd8-c21d75c03ddb
+		sourceColumn: DayofWeek
+
+	column DayofWeekShort
+		dataType: string
+		lineageTag: 413d2db7-ef58-4f1d-89e3-503ce8ccce30
+		sourceColumn: DayofWeekShort
+
+	column DayofWeekNumber
+		dataType: string
+		lineageTag: 5ceb15dd-a788-4ab4-be3c-3e1499f8995c
+		sourceColumn: DayofWeekNumber
+
+	column WorkingDay
+		dataType: string
+		lineageTag: 0292309b-294b-4a4b-881b-4adc4a247901
+		sourceColumn: WorkingDay
+
+	column WorkingDayNumber
+		dataType: string
+		lineageTag: 9a66bba7-bef4-4101-9198-dce2dcc13eec
+		sourceColumn: WorkingDayNumber
+
+	partition Date = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\AdriánSánchezLópez\OneDrive - NEXT DIGITAL HUB S.L\PROJECTS\ProgramacionAgentica\Example-PBI-Contoso\src\date.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    PromotedHeaders
+

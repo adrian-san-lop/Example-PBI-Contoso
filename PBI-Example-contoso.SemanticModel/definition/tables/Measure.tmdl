@@ -1,0 +1,69 @@
+table Measure
+	lineageTag: 4b8a2405-cd20-4cab-bf2e-125a629d8ab4
+
+	/// Net sales value at line level, using quantity multiplied by net unit price. Source numeric text is converted with VALUE.
+	measure 'Total Net Sales' =
+			SUMX(
+			    'Sales',
+			    VAR Qty = VALUE('Sales'[Quantity])
+			    VAR NetUnitPrice = VALUE('Sales'[NetPrice])
+			    RETURN
+			        Qty * NetUnitPrice
+			)
+		formatString: #,##0.00
+		displayFolder: Finance
+		lineageTag: 7e4f078b-8098-4dcd-b459-58e148512bac
+
+	/// Total product cost at line level, using quantity multiplied by unit cost. Source numeric text is converted with VALUE.
+	measure 'Total Cost' =
+			SUMX(
+			    'Sales',
+			    VAR Qty = VALUE('Sales'[Quantity])
+			    VAR UnitCost = VALUE('Sales'[UnitCost])
+			    RETURN
+			        Qty * UnitCost
+			)
+		formatString: #,##0.00
+		displayFolder: Finance
+		lineageTag: ce04a99f-e6f2-4935-9d3e-5e7de4fb6fcd
+
+	/// Net sales less total product cost.
+	measure 'Gross Profit' =
+			VAR NetSales = [Total Net Sales]
+			VAR Cost = [Total Cost]
+			RETURN
+			    NetSales - Cost
+		formatString: #,##0.00
+		displayFolder: Finance
+		lineageTag: 993d755e-8770-42c8-9fb8-e1d0cc591b72
+
+	/// Gross profit as a percentage of net sales; returns BLANK when net sales is zero or unavailable.
+	measure 'Gross Margin %' =
+			VAR Profit = [Gross Profit]
+			VAR NetSales = [Total Net Sales]
+			RETURN
+			    DIVIDE(Profit, NetSales)
+		formatString: 0.0%;-0.0%;-
+		displayFolder: Finance
+		lineageTag: d9a0ec65-8c9f-44e2-92d1-6a97251d9ac2
+
+	/// Average net sales value per distinct order; returns BLANK when there are no orders.
+	measure 'Average Order Value' =
+			VAR NetSales = [Total Net Sales]
+			VAR OrderCount = DISTINCTCOUNT('Orders'[OrderKey])
+			RETURN
+			    DIVIDE(NetSales, OrderCount)
+		formatString: #,##0.00
+		displayFolder: Finance
+		lineageTag: 46a18303-381c-4eb3-8ea0-128f43b29d3e
+
+	column _MeasureTable
+		dataType: string
+		isHidden
+		lineageTag: 9d56b7da-705d-46fe-ab25-0c2b9418fc13
+		sourceColumn: _MeasureTable
+
+	partition Measures = m
+		mode: import
+		source = #table({"_MeasureTable"}, {})
+

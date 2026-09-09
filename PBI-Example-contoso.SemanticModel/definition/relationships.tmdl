@@ -1,0 +1,37 @@
+relationship OrdersToCustomer
+	fromColumn: Orders.CustomerKey
+	toColumn: Customer.CustomerKey
+
+relationship OrdersToStore
+	fromColumn: Orders.StoreKey
+	toColumn: Store.StoreKey
+
+relationship SalesToProduct
+	fromColumn: Sales.ProductKey
+	toColumn: Product.ProductKey
+
+relationship OrderRowsToProduct
+	fromColumn: OrderRows.ProductKey
+	toColumn: Product.ProductKey
+
+relationship SalesToOrders
+	fromColumn: Sales.OrderKey
+	toColumn: Orders.OrderKey
+
+relationship OrderRowsToOrders
+	fromColumn: OrderRows.OrderKey
+	toColumn: Orders.OrderKey
+
+relationship OrdersToDateOrder
+	fromColumn: Orders.OrderDate
+	toColumn: Date.Date
+
+relationship OrdersToDateDelivery
+	isActive: false
+	fromColumn: Orders.DeliveryDate
+	toColumn: Date.Date
+
+relationship CurrencyExchangeToDate
+	fromColumn: CurrencyExchange.Date
+	toColumn: Date.Date
+

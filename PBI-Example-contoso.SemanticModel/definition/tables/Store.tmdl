@@ -1,0 +1,67 @@
+table Store
+	lineageTag: ae8f561a-03af-4a68-84ab-a8a03bff1886
+
+	column StoreKey
+		dataType: string
+		lineageTag: e3a622a2-cae9-40d9-b30b-34b6378fa937
+		sourceColumn: StoreKey
+
+	column StoreCode
+		dataType: string
+		lineageTag: 9ac2811b-5f83-456a-8d2b-7e1aea9f0a6f
+		sourceColumn: StoreCode
+
+	column GeoAreaKey
+		dataType: string
+		lineageTag: ab160cd8-b22e-48f0-bb95-6349e71da2b8
+		sourceColumn: GeoAreaKey
+
+	column CountryCode
+		dataType: string
+		lineageTag: 1c6a884b-6b00-4c95-9096-1b3e20f9f826
+		sourceColumn: CountryCode
+
+	column CountryName
+		dataType: string
+		lineageTag: edc6983d-bb8a-496f-8d8f-df65f248baf5
+		sourceColumn: CountryName
+
+	column State
+		dataType: string
+		lineageTag: 71ea48bd-20b4-4867-9f70-400da8f62ef3
+		sourceColumn: State
+
+	column OpenDate
+		dataType: string
+		lineageTag: a31100ae-cb1f-4db4-86eb-b76523b68a91
+		sourceColumn: OpenDate
+
+	column CloseDate
+		dataType: string
+		lineageTag: 58234468-10a2-4313-bf1a-1e98bb8a3d66
+		sourceColumn: CloseDate
+
+	column Description
+		dataType: string
+		lineageTag: 6e63203d-0feb-49dd-b673-58be37bf14c7
+		sourceColumn: Description
+
+	column SquareMeters
+		dataType: string
+		lineageTag: 309d6b0f-aab4-4cfa-81a5-49adb08279ba
+		sourceColumn: SquareMeters
+
+	column Status
+		dataType: string
+		lineageTag: 587fc96b-da96-44e5-8fd2-1dabd473ae9f
+		sourceColumn: Status
+
+	partition Store = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\AdriánSánchezLópez\OneDrive - NEXT DIGITAL HUB S.L\PROJECTS\ProgramacionAgentica\Example-PBI-Contoso\src\store.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    PromotedHeaders
+

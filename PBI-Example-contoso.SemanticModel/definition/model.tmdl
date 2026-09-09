@@ -11,5 +11,15 @@ annotation __PBI_TimeIntelligenceEnabled = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
+ref table CurrencyExchange
+ref table Customer
+ref table Date
+ref table OrderRows
+ref table Orders
+ref table Product
+ref table Sales
+ref table Store
+ref table Measure
+
 ref cultureInfo en-US
 

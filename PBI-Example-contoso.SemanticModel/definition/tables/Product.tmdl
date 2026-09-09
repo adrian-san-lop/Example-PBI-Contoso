@@ -1,0 +1,82 @@
+table Product
+	lineageTag: 6ec0d062-277a-463c-b949-bcc58d4c58fb
+
+	column ProductKey
+		dataType: string
+		lineageTag: 46647cf3-701d-4b01-99d6-dda45fb61e4c
+		sourceColumn: ProductKey
+
+	column ProductCode
+		dataType: string
+		lineageTag: e11685b1-7d84-4a9a-a1d8-3513571dea28
+		sourceColumn: ProductCode
+
+	column ProductName
+		dataType: string
+		lineageTag: 0763290f-7283-4bcd-9ae5-e57722b8e02a
+		sourceColumn: ProductName
+
+	column Manufacturer
+		dataType: string
+		lineageTag: 1a926fd6-d6f7-45b1-b28b-c49cfab5c7d1
+		sourceColumn: Manufacturer
+
+	column Brand
+		dataType: string
+		lineageTag: 0ffdb097-a8ab-436c-83dc-284ca587045b
+		sourceColumn: Brand
+
+	column Color
+		dataType: string
+		lineageTag: a1b349b7-6b4d-41e4-9475-d60ec59b91e3
+		sourceColumn: Color
+
+	column WeightUnit
+		dataType: string
+		lineageTag: 109197df-35ae-4261-b70e-2518f9963126
+		sourceColumn: WeightUnit
+
+	column Weight
+		dataType: string
+		lineageTag: ce5ba02f-3935-4f44-bdcc-70b8fb45f214
+		sourceColumn: Weight
+
+	column Cost
+		dataType: string
+		lineageTag: 4a11eadb-3c32-4b2d-8ab4-b38489a0b97e
+		sourceColumn: Cost
+
+	column Price
+		dataType: string
+		lineageTag: b7a7b4a2-43bc-4951-b380-0072c84bf4d6
+		sourceColumn: Price
+
+	column CategoryKey
+		dataType: string
+		lineageTag: b38b527a-2087-47a3-a214-8d0293d7e7c1
+		sourceColumn: CategoryKey
+
+	column CategoryName
+		dataType: string
+		lineageTag: 31706ce1-8203-4cd9-9e44-364c2b1088a5
+		sourceColumn: CategoryName
+
+	column SubCategoryKey
+		dataType: string
+		lineageTag: 6f06f823-0042-4567-aca8-dd204cb67920
+		sourceColumn: SubCategoryKey
+
+	column SubCategoryName
+		dataType: string
+		lineageTag: f7a18eb9-8577-4688-9a9e-9421ad68b805
+		sourceColumn: SubCategoryName
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\AdriánSánchezLópez\OneDrive - NEXT DIGITAL HUB S.L\PROJECTS\ProgramacionAgentica\Example-PBI-Contoso\src\product.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    PromotedHeaders = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+				in
+				    PromotedHeaders
+
